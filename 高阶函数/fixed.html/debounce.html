@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+        .click {
+            width: 100%;
+            height: 150%;
+            background-color: deepskyblue;
+        }
+        input {
+            margin-top: 15%;
+            margin-left: 28%;
+            height: 90px;
+            width: 500px;
+            font-size: 30px;
+            background-color: rgb(238, 240, 240);
+            color: rgb(145, 84, 14);
+        }
+        textarea {
+            margin-left: 28%;
+            width: 500px;
+            height: 2=300px;
+            font-size: 18px;
+            background-color: aqua;
+            color: rgb(140, 108, 228);
+        }
+    </style>
+</head>
+<body>
+    <div class="click">
+    <input type="text" id="name"><br>
+    <textarea type="multipart" name="res" id="res" cols="30" rows="10" placeholder="每一次结果"></textarea>
+</div>
+    <script>
+        let inputContent = document.getElementById("name");
+        let textareaContent = document.getElementById("res");
+        let changeContent = function(value){
+            textareaContent.innerHTML += value  +'\n';
+        }
+        function debounce(fn,delay=1000){
+            let timer=0;
+            return function(...args){
+                
+                console.log(args);
+                if(timer){
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(function(){
+                    fn.apply(this,args);
+                    timer = null;
+                },delay);
+            }
+        }
+        let outPut = debounce(changeContent,1000);
+        inputContent.addEventListener("input",()=>{
+            outPut(inputContent.value)
+        })
+    </script>
+</body>
+</html>
